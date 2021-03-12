@@ -1,13 +1,13 @@
-# react-native-media-query
-Adds support for media queries in react-native/react-native-web, `:hover` for react-native-web, triggers on device orientation changes and also works with next.js static generation or server-side rendering.
+# react-native-web-styles
+Adds support for media queries in react-native/react-native-web, `:hover` and other pseudoslectors for react-native-web, triggers on device orientation changes and also works with next.js static generation or server-side rendering.
 # Installation
 
-`yarn add react-native-media-query`
+`yarn add react-native-web-styles`
 or
-`npm install react-native-media-query --save`
+`npm install react-native-web-styles --save`
 # Usage
 ```javascript
-import { useMediaQuery } from 'react-native-media-query';
+import { useWebStyles } from 'react-native-web-styles';
 
 //note that StyleSheet.create shouldn't be used here
 const styles = {
@@ -22,15 +22,15 @@ const styles = {
     }
 }
 
-const [ids, styles] = useMediaQuery(styles);
+const [ids, styles] = useWebStyles(styles);
 
 ...
 
 // for react-native-web 0.13+
-<Component style={styles.example} dataSet={{ media: ids.example }} />
+<Component style={styles.example} dataSet={{ webstyle: ids.example }} />
 
 // for older react-native-web
-<Component style={styles.example} data-media={ids.example} />
+<Component style={styles.example} data-webstyle={ids.example} />
 
 ```
 
@@ -41,7 +41,7 @@ Update your _document.js like example below. Further usage is exactly the same l
 ```javascript
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import React from 'react';
-import { flush as rnmq } from 'react-native-media-query';
+import { collectWebStyles } from 'react-native-web-styles';
 import { AppRegistry } from 'react-native-web';
 
 export default class CustomDocument extends Document {
@@ -50,7 +50,7 @@ export default class CustomDocument extends Document {
         const { getStyleElement } = AppRegistry.getApplication('Main');
         const styles = [
             getStyleElement(),
-            rnmq(),
+            collectWebStyles(),
         ];
         return { ...renderPage(), styles: React.Children.toArray(styles) };
     }

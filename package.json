@@ -1,6 +1,6 @@
 {
-  "name": "react-native-media-query",
-  "version": "1.0.3",
+  "name": "react-native-web-styles",
+  "version": "1.0.0",
   "description": "Media queries for react-native and react-native-web",
   "main": "index",
   "directories": {
@@ -15,9 +15,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kasinskas/react-native-media-query.git"
+    "url": "https://github.com/georgii-ivanov/react-native-web-styles.git"
   },
-  "homepage": "https://github.com/kasinskas/react-native-media-query#readme",
+  "homepage": "https://github.com/georgii-ivanov/react-native-web-styles#readme",
   "keywords": [
     "react-native",
     "react-native-web",
@@ -30,6 +30,6 @@
     "style",
     "stylesheet"
   ],
-  "author": "Rokas Kašinskas",
+  "author": "Georgii Ivanov",
   "license": "MIT"
 }

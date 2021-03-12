@@ -3,7 +3,6 @@ import createDeclarationBlock from '../utils/create-declaration-block';
 import stringHash from "string-hash"
 
 const isMedia = (str) => str.indexOf('@media') === 0;
-const isHover = (str) => str.indexOf(':hover') === 0;
 
 const createStyle = (stylesWithQuery) => {
     let ids = {};
@@ -11,16 +10,14 @@ const createStyle = (stylesWithQuery) => {
     const cleanStyles = JSON.parse(JSON.stringify(stylesWithQuery));
     Object.keys(stylesWithQuery).map((key) => {
         Object.keys(stylesWithQuery[key])
-            .filter((k) => isMedia(k) || isHover(k))
             .map((query) => {
                 const css = createDeclarationBlock(stylesWithQuery[key][query]);
                 let str;
-                const hash = `rnmq-${stringHash(`${key}${query}${css}`)}`
+                const hash = `rnws-${stringHash(`${key}${query}${css}`)}`
                 if (isMedia(query)) {
-                    str = `${query} {[data-media~="${hash}"] ${css}}`;
-                }
-                if (isHover(query)) {
-                    str = `[data-media~="${hash}"]${query} ${css}`;
+                    str = `${query} {[data-webstyle~="${hash}"] ${css}}`;
+                } else {
+                    str = `[data-webstyle~="${hash}"]${query} ${css}`;
                 }
                 ids = { ...ids, [key]: hash };
 
@@ -31,7 +28,7 @@ const createStyle = (stylesWithQuery) => {
     return { ids, cleanStyles };
 };
 
-export const useMediaQuery = (stylesWithQuery) => {
+export const useWebStyles = (stylesWithQuery) => {
     const { ids, cleanStyles } = createStyle(stylesWithQuery);
     return [ids, cleanStyles];
 };

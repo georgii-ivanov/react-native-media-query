@@ -1,3 +1,3 @@
-const flush = () => {};
-export { useMediaQuery } from './useMediaQuery';
-export { flush };
+const collectWebStyles = () => {};
+export { useWebStyles } from './useWebStyles';
+export { collectWebStyles };

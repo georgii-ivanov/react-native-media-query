@@ -1,2 +1,2 @@
-export { useMediaQuery } from './useMediaQuery';
-export { flush } from './inject';
+export { useWebStyles } from './useWebStyles';
+export { collectWebStyles } from './inject';

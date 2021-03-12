@@ -2,13 +2,11 @@ import { Dimensions } from 'react-native';
 import mediaQuery from 'css-mediaquery';
 
 const isMedia = (str) => str.indexOf('@media') === 0;
-const isHover = (str) => str.indexOf(':hover') === 0;
 
 const createStyle = (stylesWithQuery) => {
     let cleanStyles = JSON.parse(JSON.stringify(stylesWithQuery));
     Object.keys(stylesWithQuery).map((key) => {
         Object.keys(stylesWithQuery[key])
-            .filter((k) => isMedia(k) || isHover(k))
             .map((str) => {
                 if (isMedia(str)) {
                     const mqStr = str.replace('@media', '');
@@ -29,7 +27,7 @@ const createStyle = (stylesWithQuery) => {
     return cleanStyles;
 };
 
-export const useMediaQuery = (stylesWithQuery) => {
+export const useWebStyles = (stylesWithQuery) => {
     const styles = createStyle(stylesWithQuery);
     return [{}, styles];
 };
