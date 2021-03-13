@@ -6,7 +6,7 @@ const createStyle = (stylesWithQuery) => {
     let cleanStyles = JSON.parse(JSON.stringify(stylesWithQuery));
     Object.keys(stylesWithQuery).map((key) => {
         Object.keys(stylesWithQuery[key])
-            .filter((key => !isRNProp(key)))
+            .filter((key) => !isRNProp(key))
             .map((str) => {
                 if (isMedia(str)) {
                     const mqStr = str.replace('@media', '');

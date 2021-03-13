@@ -1,8 +1,7 @@
-
 import stringHash from 'string-hash';
-import createDeclarationBlock from '../utils/create-declaration-block';
 import { setRule } from '../inject';
 import { isMedia, isRNProp } from '../utils/selector-query-match';
+import createDeclarationBlock from '../utils/create-declaration-block';
 
 const createStyle = (stylesWithQuery) => {
     let ids = {};
@@ -10,7 +9,7 @@ const createStyle = (stylesWithQuery) => {
     const cleanStyles = JSON.parse(JSON.stringify(stylesWithQuery));
     Object.keys(stylesWithQuery).map((key) => {
         Object.keys(stylesWithQuery[key])
-            .filter((key => !isRNProp(key)))
+            .filter((key) => !isRNProp(key))
             .map((query) => {
                 const css = createDeclarationBlock(stylesWithQuery[key][query]);
                 let str;
