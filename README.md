@@ -27,10 +27,10 @@ const [ids, styles] = useWebStyles(styles);
 ...
 
 // for react-native-web 0.13+
-<Component style={styles.example} dataSet={{ webstyle: ids.example }} />
+<Component style={styles.example} dataSet={{ style: ids.example }} />
 
 // for older react-native-web
-<Component style={styles.example} data-webstyle={ids.example} />
+<Component style={styles.example} data-style={ids.example} />
 
 ```
 

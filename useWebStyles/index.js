@@ -1,12 +1,12 @@
 import { Dimensions } from 'react-native';
 import mediaQuery from 'css-mediaquery';
-
-const isMedia = (str) => str.indexOf('@media') === 0;
+import { isMedia, isRNProp } from '../utils/selector-query-match';
 
 const createStyle = (stylesWithQuery) => {
     let cleanStyles = JSON.parse(JSON.stringify(stylesWithQuery));
     Object.keys(stylesWithQuery).map((key) => {
         Object.keys(stylesWithQuery[key])
+            .filter((key => !isRNProp(key)))
             .map((str) => {
                 if (isMedia(str)) {
                     const mqStr = str.replace('@media', '');

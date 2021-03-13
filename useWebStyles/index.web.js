@@ -1,8 +1,8 @@
-import { setRule } from '../inject';
-import createDeclarationBlock from '../utils/create-declaration-block';
-import stringHash from "string-hash"
 
-const isMedia = (str) => str.indexOf('@media') === 0;
+import stringHash from 'string-hash';
+import createDeclarationBlock from '../utils/create-declaration-block';
+import { setRule } from '../inject';
+import { isMedia, isRNProp } from '../utils/selector-query-match';
 
 const createStyle = (stylesWithQuery) => {
     let ids = {};
@@ -10,14 +10,15 @@ const createStyle = (stylesWithQuery) => {
     const cleanStyles = JSON.parse(JSON.stringify(stylesWithQuery));
     Object.keys(stylesWithQuery).map((key) => {
         Object.keys(stylesWithQuery[key])
+            .filter((key => !isRNProp(key)))
             .map((query) => {
                 const css = createDeclarationBlock(stylesWithQuery[key][query]);
                 let str;
                 const hash = `rnws-${stringHash(`${key}${query}${css}`)}`
                 if (isMedia(query)) {
-                    str = `${query} {[data-webstyle~="${hash}"] ${css}}`;
+                    str = `${query} {[data-style~="${hash}"] ${css}}`;
                 } else {
-                    str = `[data-webstyle~="${hash}"]${query} ${css}`;
+                    str = `[data-style~="${hash}"]${query} ${css}`;
                 }
                 ids = { ...ids, [key]: hash };
 
